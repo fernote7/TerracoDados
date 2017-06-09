@@ -55,8 +55,6 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
       
       if(!is.na(data)){
         
-        show("plotcomp")
-        
         s = sum(data$value[2:nrow(data)])
         
         exp = round(data[data$component == "Exportações Líquidas","value"]/s,2)
@@ -94,6 +92,7 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
                        yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
         
         output$plotcomp <- renderPlotly(p)
+        show("plotcomp")
         
         last.pars.comp <<- pars.comp
         msgs$warnings <<- ""
@@ -125,8 +124,6 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
       
       hide("plots")
       show("loading")
-      
-      show("plotgdp")
 
       ay = NULL
       first = TRUE
@@ -215,7 +212,8 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
         cnt = countrycode(country,"iso3c","country.name")
         msgs$warnings <<- paste0("Esta(s) série(s) do PIB não está(ão) <br> disponívei(s) para ",cnt, ". <br>Tente a outra instituição.")
       }
-     
+      
+      show("plotgdp")
       show("plots")
       hide("loading")
       
