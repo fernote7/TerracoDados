@@ -1,3 +1,4 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
 
 barplotModuleInput <- function(id){
   
@@ -87,7 +88,7 @@ barplotModule <- function(input, output, session, type.choices, meas.choices, ge
       title = paste0("<b>",title, "</b>")
       
       p <- p %>% layout(title = title,
-                        yaxis = list(title = names(which(meas.choices == meas))),
+                        yaxis = list(title = names(which(meas.choices() == meas))),
                         xaxis = list(title = ""),
                         titlefont = list(size = 13))
       

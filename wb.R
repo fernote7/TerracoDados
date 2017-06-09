@@ -1,3 +1,5 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 require(wbstats)
 require(countrycode)
 

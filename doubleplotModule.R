@@ -1,11 +1,14 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 doubleplotModuleInput <- function(id){
   
   ns <- NS(id)
   
   div(id = frameModuleInput(id, 2), splitLayout(cellWidths = c("60%", "40%"), 
-                                  plotlyOutput(ns("plotgdp")), 
+                                  div(plotlyOutput(ns("plotgdp")),
+                                                  messageModuleInput(ns("gdp"))),
                                   div(plotlyOutput(ns("plotcomp")),
-                                                   messageModuleInput(ns("ins"))
+                                                   messageModuleInput(ns("comp"))
       )))
 }
 
@@ -100,7 +103,7 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
       else {
         hide("plotcomp") 
         cnt = countrycode(country,"iso3c","country.name")
-        msgs$warnings <<- paste0("Os dados dos componentes do PIB não estão <br> disponíveis para ",cnt)
+        msgs$warnings <<- paste0("Os dados dos componentes do PIB não estão <br> disponíveis para ",cnt, ". <br>Tente a outra instituição.")
       }
     }
   })
@@ -122,15 +125,17 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
       
       hide("plots")
       show("loading")
+      
+      show("plotgdp")
 
       ay = NULL
       first = TRUE
       
       p = plot_ly(type = "scatter")
 
-      last.quar = meas.choices[["% Trim. Ant."]]
-      last.year = meas.choices[["% Ano Ant."]]
-      perc = meas.choices[["%"]]
+      last.quar = meas.choices()[["% Trim. Ant."]]
+      last.year = meas.choices()[["% Ano Ant."]]
+      perc = meas.choices()[["%"]]
     
 
       if(length(meas) == 2 && all(meas %in% c(last.quar,last.year))){
@@ -167,7 +172,7 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
 
         if(class(series) == "ts"){
 
-          name = names(which(meas.choices == measure))
+          name = names(which(meas.choices() == measure))
 
           if(first){
             p <- add_trace(p, x = as.Date.ts(series), y = series, name = name, mode = "lines+markers")
@@ -201,12 +206,18 @@ doubleplotModule <- function(input, output, session, type.choices, meas.choices,
 
       output$plotgdp <- renderPlotly(p)
       
+      if(nrow(data) != 0){
+        data <- cbind(data.frame(as.Date.ts(data)),data.frame(data))
+        names(data) <- nms
+        gdp.data <<- data
+      } else {
+        hide("plotgdp") 
+        cnt = countrycode(country,"iso3c","country.name")
+        msgs$warnings <<- paste0("Esta(s) série(s) do PIB não está(ão) <br> disponívei(s) para ",cnt, ". <br>Tente a outra instituição.")
+      }
+     
       show("plots")
       hide("loading")
-
-      data <- cbind(data.frame(as.Date.ts(data)),data.frame(data))
-      names(data) <- nms
-      gdp.data <<- data
       
       last.pars.gdp <<- pars.gdp
 

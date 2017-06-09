@@ -1,3 +1,5 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 initModule <- function(input, output, session, meas.choices, type.choices, getfunc, compfunc){
   
   country = "BRA"

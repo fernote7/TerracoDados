@@ -1,3 +1,5 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 
 frameModuleInput <- function(id, num){
   return(paste0(id,"-fr",num))

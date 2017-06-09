@@ -1,3 +1,5 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 dfs <- list("oecd" = NULL, "wb" = NULL, "imf" = NULL)
 lens <- list("oecd" = 0, "wb" = 0, "imf" = 0)
 
@@ -28,7 +30,11 @@ tableModule <- function(input, output, session, id, tabfunc) {
         } else {
           last = as.vector(dfs[[id]][,1])
           rmvd = !(last %in% countrycode(input$country,"iso3c", "country.name"))
-          rmvd = last[rmvd][[1]]
+          
+          if(length(last[rmvd]) > 0){
+            rmvd = last[rmvd][[1]]
+          }
+          
           dfs[[id]] <<- dfs[[id]][dfs[[id]][,1] != rmvd,]
         }
       }
@@ -40,6 +46,7 @@ tableModule <- function(input, output, session, id, tabfunc) {
     }
     
     dfs[[id]]
+    print(dfs[[id]])
   })
   
   output$table <- DT::renderDataTable(

@@ -1,10 +1,8 @@
 name: gdp_terraco
+title:
 account: talithafs
 server: shinyapps.io
 appId: 160853
-bundleId: 732166
+bundleId: 859233
 url: https://talithafs.shinyapps.io/gdp_terraco/
-when: 1488508658.04944
-asMultiple: FALSE
-asStatic: FALSE
-ignoredFiles: teste.R|Plotly/Balanço de Pagamentos/id_tc.csv|Plotly/Balanço de Pagamentos/id_tc.R|Plotly/Dívida Externa/divida_externa.R|Plotly/Dívida Externa/divida_externa_bruta.csv|Plotly/Dívida Externa/divida_externa_liquida.csv|Plotly/Dívida Externa/reservas.csv|Plotly/Dívida Externa/termos_troca.csv|Plotly/Dívida Pública/divida.csv|Plotly/Dívida Pública/divida_publica.R|Plotly/PIB Per Capita/dolares_correntes.csv|Plotly/PIB Per Capita/pib_per_capita.R|Plotly/PIB Per Capita/ppp_constante.csv|Plotly/PIB Per Capita/wb.csv|Plotly/Salário Mínimo/salario.csv|Plotly/Salário Mínimo/salario.R|www/cerulean.css|www/flatly.css|www/hidayah.css|www/mamba.css|www/niceadmin.css|www/sandstone.css|www/sb-admin.css|www/squadfree.css|www/style.css|www/techie.css
+when: 1496974141.73608

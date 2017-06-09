@@ -1,3 +1,5 @@
+#' @author Talitha Speranza \email{talitha.speranza@gmail.com}
+
 library(shiny)
 library(OECD)
 library(countrycode)
